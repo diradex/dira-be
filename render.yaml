@@ -1,0 +1,26 @@
+services:
+  - type: web
+    name: driveflow-backend
+    env: docker
+    dockerfilePath: Dockerfile
+    dockerContext: .
+    plan: free # Free tier - spins down after 15 min inactivity
+    envVars:
+      - key: JWT_SECRET
+        sync: false
+      - key: JWT_EXPIRATION_MS
+        value: 86400000
+      - key: CORS_ALLOWED_ORIGINS
+        sync: false
+      - key: LOG_LEVEL
+        value: INFO
+      - key: DDL_AUTO
+        value: update
+    # Render will automatically set DATABASE_URL when PostgreSQL is linked
+
+databases:
+  - name: driveflow-db
+    databaseName: driveflow
+    user: driveflow
+    plan: free # Free tier - 1GB storage, expires after 30 days
+

@@ -1,0 +1,37 @@
+spring.application.name=backend
+
+# Database Configuration (uses environment variables, falls back to defaults for local dev)
+spring.datasource.url=${DATABASE_URL:jdbc:postgresql://localhost:5432/driveflow}
+spring.datasource.username=${DB_USERNAME:${DATABASE_USERNAME:postgres}}
+spring.datasource.password=${DB_PASSWORD:${DATABASE_PASSWORD:password}}
+spring.jpa.hibernate.ddl-auto=${DDL_AUTO:update}
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+
+# Server Configuration
+server.port=${PORT:8080}
+
+# JWT Configuration
+# JWT_SECRET must be BASE64 encoded (at least 32 bytes). Generate with: openssl rand -base64 32
+# REQUIRED: Set JWT_SECRET environment variable - NEVER hardcode secrets!
+app.jwt.secret=${JWT_SECRET}
+app.jwt.expiration-ms=${JWT_EXPIRATION_MS:86400000}
+
+# CORS Configuration
+app.cors.allowed-origins=${CORS_ALLOWED_ORIGINS:http://localhost:4200}
+
+# Frontend URL for emails
+app.frontend.url=${FRONTEND_URL:http://localhost:4200}
+
+# Logging
+logging.level.org.springframework.security=${LOG_LEVEL:INFO}
+
+# Email Configuration
+# NEVER commit real credentials! Use environment variables.
+# For Gmail/Production:
+spring.mail.host=${MAIL_HOST:smtp.gmail.com}
+spring.mail.port=${MAIL_PORT:587}
+spring.mail.username=${MAIL_USERNAME:}
+spring.mail.password=${MAIL_PASSWORD:}
+spring.mail.properties.mail.smtp.auth=${MAIL_SMTP_AUTH:true}
+spring.mail.properties.mail.smtp.starttls.enable=${MAIL_STARTTLS_ENABLE:true}
+
